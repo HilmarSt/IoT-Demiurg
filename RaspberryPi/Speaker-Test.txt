@@ -1,0 +1,22 @@
+speaker-test -c2 -twav -l7
+
+Usage: speaker-test [OPTION]...
+-h,--help       help
+-D,--device     playback device
+-r,--rate       stream rate in Hz
+-c,--channels   count of channels in stream
+-f,--frequency  sine wave frequency in Hz
+-F,--format     sample format
+-b,--buffer     ring buffer size in us
+-p,--period     period size in us
+-P,--nperiods   number of periods
+-t,--test       pink=use pink noise, sine=use sine wave, wav=WAV file
+-l,--nloops     specify number of loops to test, 0 = infinite
+-s,--speaker    single speaker test. Values 1=Left, 2=right, etc
+-w,--wavfile    Use the given WAV file as a test sound
+-W,--wavdir     Specify the directory containing WAV files
+-m,--chmap      Specify the channel map to override
+-X,--force-frequency    force frequencies outside the 30-8000hz range
+-S,--scale      Scale of generated test tones in percent (default=80)
+
+Recognized sample formats are: S8 S16_LE S16_BE FLOAT_LE S24_3LE S24_3BE S32_LE S32_BE

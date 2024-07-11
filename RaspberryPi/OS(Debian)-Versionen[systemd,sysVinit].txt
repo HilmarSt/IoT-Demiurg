@@ -1,0 +1,77 @@
+cat /etc/os-release
+->
+PRETTY_NAME="Raspbian GNU/Linux 11 (bullseye)"
+NAME="Raspbian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=raspbian
+ID_LIKE=debian
+HOME_URL="http://www.raspbian.org/"
+SUPPORT_URL="http://www.raspbian.org/RaspbianForums"
+BUG_REPORT_URL="http://www.raspbian.org/RaspbianBugs"
+
+
+--
+https://wiki-debian-org.translate.goog/Init?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=de&_x_tr_pto=rq
+Overview
+The system initialization process is handled by the init daemon. In squeeze and earlier releases, that daemon is provided by the sysvinit package, and no alternatives are supported. In wheezy, the default init daemon is still sysvinit, but a "technology preview" of systemd is available. In jessie and stretch, the default init system is systemd, but switching to sysvinit is supported.
+
+Since jessie, only systemd is fully supported; sysvinit is mostly supported, but Debian packages are not required to provide sysvinit start scripts. In Buster, OpenRC was introduced, which provides an alternative to service handling and system runlevel mechanisms by being compatible with the sysv init program. Support for init systems other than systemd is significantly improved in Bullseye. runit is also packaged, but has not received the same level of testing and support as the others, and is not currently supported as PID 1. As of Bullseye, a collection of sysvinit start scripts that have been removed from their original packages is provided in the orphan-sysvinit-scripts package.
+
+Determining the init system
+In general, you can determine which init system is installed by checking whether the /sbin/init file is a symlink. If it's not a symlink, then sysvinit is probably in use. If it's a symlink pointing to /lib/systemd/systemd then systemd is in use. If it's a symlink pointing to /lib/sysvinit/init then sysvinit is in use.
+
+
+https://www.debian.org/releases/
+Die nächste Veröffentlichung von Debian heißt "trixie" – "Testing", bisher noch kein Veröffentlichungsdatum
+Debian 12 ("Bookworm") – aktuelle Veröffentlichung - "Stable"
+Debian 11 ("Bullseye") – aktuelle Veröffentlichung - "Oldstable"
+Debian 10 ("Buster") – aktuelle Veröffentlichung - "Oldoldstable" unter LTS-Support
+Debian 9 ("Stretch") – veraltete Veröffentlichung, unter erweitertem LTS-Support
+Debian 8 ("Jessie") – veraltete Veröffentlichung, unter erweitertem LTS-Support
+Debian 7 ("Wheezy") – veraltete Veröffentlichung
+Debian 6.0 ("Squeeze") – veraltete Veröffentlichung
+Debian GNU/Linux 5.0 ("Lenny") – veraltete Veröffentlichung
+Debian GNU/Linux 4.0 ("Etch") – veraltete Veröffentlichung
+
+
+https://xavier.arnaus.net/blog/upgrade-raspberry-pi-os-from-11-bullseye-to-12-bookworm
+Upgrade Raspberry Pi OS from 11 Bullseye to 12 Bookworm
+
+Debian version 	Code name 	Release date
+Debian 8 	Jessie 	September 2015
+Debian 9 	Stretch 	August 2017
+Debian 10 	Buster 	June 2019
+Debian 11 	Bullseye 	November 2021
+Debian 12 	Bookworm 	June 2023
+
+
+https://raspberrytips.com/update-raspberry-pi-latest-version/
+Yes, all of the code names are based on Toy Story characters :).
+
+
+https://forum-raspberrypi.de/forum/thread/59789-pi1-b-updaten/
+  Das würde bei einem 1B+ richtig lange dauern und keinen wirklichen Spaß machen.
+Jessie -> Stretch -> Buster -> Bullseye -> Bookworm
+  (auf Bullseye und Bookworm könnte man noch über 'last-stable' und dann 'stable' kommen, doch davor wäre das schon sehr aufwändig)
+
+Wenn Du so Sachen wie Hardware-Videobeschleunigung über den omxplayer oder die Kameraanbindung über raspistill bzw. raspivid nutzt, ist ab bullseye eh Schluss...
+
+
+https://www.raspberrypi.com/software/operating-systems/
+Release date: March 15th 2024
+Kernel version: 6.6
+Debian version: 12 (bookworm)
+
+Release date: March 12th 2024
+Kernel version: 6.1
+Debian version: 11 (bullseye)
+
+
+https://de.wikipedia.org/wiki/Systemd
+Systemd ist abwärtskompatibel zu SysVinit-Skripten
+Der Hauptkritikpunkt an systemd liegt in seinem Anspruch, deutlich mehr verschiedene Aufgaben als das alte SysVinit erledigen zu wollen,
+
+https://de.wikipedia.org/wiki/SysVinit
+SysVinit ist das init-System des Unix-Betriebssystems System V.

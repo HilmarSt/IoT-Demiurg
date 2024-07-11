@@ -1,0 +1,11 @@
+sudo apt-get install mpg123
+mpg123 http://ice1.somafm.com/u80s-128-mp3
+->
+Directory: http://ice1.somafm.com/
+Terminal control enabled, press 'h' for listing of keys and functions.
+Playing MPEG stream 1 of 1: u80s-128-mp3 ...
+ICY-NAME: Underground Eighties: UK Synthpop and a bit of New Wave. [SomaFM]
+ICY-URL: http://somafm.com
+MPEG 1.0 L III cbr128 44100 stereo
+ICY-META: StreamTitle='John Foxx - Fusion, Fission';StreamUrl='http://somafm.com/logos/512/u80s512.png';
+[0:20] Decoding of u80s-128-mp3 finished.

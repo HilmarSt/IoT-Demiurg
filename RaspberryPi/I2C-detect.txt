@@ -1,0 +1,7 @@
+detect I2C devices:
+
+  Install i2c-tools and check the i2c address:
+sudo apt-get install i2c-tools
+
+  Check the i2c address with the following command:
+sudo i2cdetect -y 1

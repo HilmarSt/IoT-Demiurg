@@ -1,0 +1,19 @@
+rfkill
+->
+ID TYPE      DEVICE      SOFT      HARD
+ 0 wlan      phy0   unblocked unblocked
+ 1 bluetooth hci0   unblocked unblocked
+
+rfkill block wlan
+rfkill block bluetooth
+->
+ rfkill
+ID TYPE      DEVICE    SOFT      HARD
+ 0 wlan      phy0   blocked unblocked
+ 1 bluetooth hci0   blocked unblocked
+
+auch nach reboot
+-> .bashrc
+  ...
+rfkill && sleep 4 && clear
+fortune -s && echo ... && fortune de -s
