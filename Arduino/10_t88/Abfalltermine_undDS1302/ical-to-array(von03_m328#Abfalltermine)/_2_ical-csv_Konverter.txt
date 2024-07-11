@@ -1,0 +1,33 @@
+"ical to csv"
+https://openicsfile.com/csv-convert.html
+  nur 2 ankreuzen:
+dtstart - Event start date
+(vorletztes) summary - Event summary
+-> output.csv :
+´++dtstart,summary
+"2023-01-06T::","Biotonne"
+"2023-01-20T::","Biotonne"
+..
+"2023-12-08T::","Biotonne"
+"2023-12-22T::","Biotonne"
+"2023-01-13T::","Restm++lltonne"
+"2023-01-27T::","Restm++lltonne"
+..
+"2023-12-15T::","Restm++lltonne"
+"2023-12-30T::","Restm++lltonne"
+"2023-01-19T::","Altpapiertonne"
+"2023-02-16T::","Altpapiertonne"
+..
+"2023-11-23T::","Altpapiertonne"
+"2023-12-21T::","Altpapiertonne"
+"2023-01-05T::","Gelbe Tonne"
+"2023-01-19T::","Gelbe Tonne"
+..
+"2023-12-07T::","Gelbe Tonne"
+"2023-12-21T::","Gelbe Tonne"
+
+
+
+-> mit Notepad2:
+Search&Replace
+File - Encoding - Recode.. "OEM (850)"

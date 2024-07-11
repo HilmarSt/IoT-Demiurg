@@ -1,0 +1,74 @@
+https://arduino.stackexchange.com/questions/30191/attiny85-code-on-attiny84
+There are slight differences between registers, register names and registers bit names:
+  (t85)        (t84,t44)
+- WDTCR is named WDTCSR
+- PCIE doesn't exist in GIMSK as there are two IO ports, so there are two pin change channels: PCIE0 and PCIE1
+- and PCMSK is similar to PCIE. There'll be two of them too.
+Basically you have to look into both datasheets and compare what you are using and check if it's correct.
+->
+    In code i changed: WDTCR to WDTCSR –
+    and other changes: GIMSK  = bit (PCIE0);   sbi(GIMSK, PCIE0); // Turn on Pin Change interrupts (Tell Attiny85 we want to use pin change interrupts (can be any pin))   PCMSK0 = bit (PCINT1) | bit (PCINT2);   sbi(PCMSK0, PCINT1); Now its working. Thanks!
+
+
+--
+https://elektro.turanis.de/html/prj271/index.html#AufweckendurchdenWatchdogTimerWDT
+
+hängt:       #define prescaler_bits_2s (1 << WDP0 | 1 << WDP1 | 1 << WDP2) // set prescaler bits to to 2s"
+geht nicht:  #define prescaler_bits_2s ((1<<WDP0) | (1<<WDP1) | (1 << WDP2)) // set prescaler bits to to 2s
+            WDTCSR = prescaler_bits_2s;
+(siehe Abfalltermine_undDS1302)
+
+https://wolles-elektronikkiste.de/sleep-modes-und-power-management
+  WDTCSR = (1<<WDIE) | (0<<WDE) | (1<<WDP3) | (1<<WDP0);  // 8s / interrupt, no system reset
+
+
+#include <avr/sleep.h>
+#include <avr/wdt.h>
+
+#define PIN_LED    PCINT0
+
+volatile bool toggle = true;
+
+// Watchdog imer Interrupt Service Routine
+ISR(WDT_vect)
+{
+    toggle = true;
+}
+
+void setup()
+{
+    pinMode(PIN_LED, OUTPUT);
+
+    // setup of the WDT
+    cli();
+    wdt_reset(); // reset watchdog timer
+    MCUSR &= ~(1 << WDRF); // remove reset flag
+    WDTCR = (1 << WDCE); // set WDCE, access prescaler
+    WDTCR = 1 << WDP0 | 1 << WDP1 | 1 << WDP2; // set prescaler bits to to 2s
+    WDTCR |= (1 << WDIE); // access WDT interrupt
+    sei();
+}
+
+void loop()
+{
+    if (toggle) {
+        toggle = false;
+        digitalWrite(PIN_LED, !digitalRead(PIN_LED));
+        enterSleepMode();
+    }
+}
+
+void enterSleepMode()
+{
+    byte adcsra;
+
+    adcsra = ADCSRA; // save ADC control and status register A
+    ADCSRA &= ~(1 << ADEN); // disable ADC
+
+    MCUCR |= (1 << SM1) & ~(1 << SM0); // Sleep-Modus = Power Down
+    MCUCR |= (1 << SE); // set sleep enable
+    sleep_cpu(); // sleep
+    MCUCR &= ~(1 << SE); // reset sleep enable
+
+    ADCSRA = adcsra; // restore ADC control and status register A
+}

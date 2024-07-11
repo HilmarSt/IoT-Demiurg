@@ -1,0 +1,21 @@
+https://github.com/SpenceKonde/ATTinyCore/blob/v2.0.0-devThis-is-the-head-submit-PRs-against-this/avr/extras/ATtiny_x8.md
+  The ATtiny x8-family is intended as a low cost option compatible with the popular ATmega x8 series. As such, they have a nearly identical pinout (with a couple of extra GPIO pins in the TQFP version). Although these have the full hardware I2C and SPI peripherals, they lack both a hardware serial port and the option to use a crystal as a clock source. A Micronucleus board is available with a 16 MHz external CLOCK under the name "MH Tiny" (yes, that is overclocked, maximum is spec'ed at 12 MHz. But they seem to work under typical conditions though). They use a pin numbering scheme that differs significantly from the standard one; a pin mapping is provided which matches the markings on the board.
+->
+The MH Tiny boards have pins labeled with a different pin mapping. Pins up to 13 (all of PORTD and first 6 pins of PORTB) are the same, PB6 is not available because it is the clock input, and from there on out, order is different as well.
+
+Using external CLOCK on 48/88
+These parts do not support using an external crystal (cost savings - with 28 I/O pins, hardware I2C and SPI, and a headline price like this, some things had to give). External clock, however, is supported - this requires an external clock generator (not just a crystal) connected to PB6 (CLKI). These usually come in the shiny rectangular metal package (shielding, same as on crystals), only instead of 2 terminals, or 4 terminals of which 2 are unconnected, these are almost universally use all 4 pins - Vcc, Gnd, CLKOUT, and Enable; Enable is generally active-high, and internally weakly pulled up. Be aware that if you "burn bootloader" with an external clock selected, but you have actually connected a crystal, (they are virtually impossible to tell apart visually, except by positively identifying the part and hunting down the specs), the chip cannot be programmed until you give it a clock signal (you will get a signature mismatch, and if you enable verbose uploads, which you should do anyway, it will report the signature as 0x000000). This means removing what you hoped was an external clock, and connecting a clock signal to PB6 (a 2-8 MHz square wave would be appropriate; The included enhanced ArduinoAsISP++ sketch outputs such a signal on PB2 (digital pin 10) while burning the bootloader.
+
+
+IDE:
+ATTinyCore: 16 MHz (overclocked!)
+Programmer: USBtinyISP FAST
+Pin Mapping: MH Tiny
+
+- hat keine Hardware-Serial -> SoftSerial, z.B.: SoftSer(23, 24); // RX,TX - A4/A5 = 23/24 oder SoftSer(16, 15);
+
+- USB-Buchse nur für Spannungsvers. und BitBang, z.B. im Bootloader
+
+- Analog-Pins z.B. A0, A1, A2 als Digital-Pins: 19, 20, 21
+
+- LEDs: 0 = rot; 9 (PWM) = grün

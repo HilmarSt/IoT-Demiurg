@@ -1,0 +1,43 @@
+https://www.wetzlar.de/leben-in-wetzlar/abfall-und-entsorgung/abfuhrtermine-2023.php
+
+Bachstra¯e (Naunheim)
+
+https://www.wetzlar.de/leben-in-wetzlar/abfall-und-entsorgung/abfuhrtermine-2023.php?sp_garbagecalendar_location=Bachstra%C3%9Fe+%28Naunheim%29&sp_garbagecalendar_view=categoryView&sp_garbagecalendar_garbageTypes%5B%5D=waste&sp_garbagecalendar_garbageTypes%5B%5D=recycle&sp_garbagecalendar_garbageTypes%5B%5D=paper&sp_garbagecalendar_dateSelect_month=2#sp_garbagecalendar_form
+
+Abfallart:
+Restabfall
+Biotonne
+Gelbe Tonne
+Papiertonne
+
+[anzeigen]
+
+Jahreskalender als iCal
+->
+https://www.wetzlar.de/leben-in-wetzlar/abfall-und-entsorgung/abfuhrtermine-2023.php?sp_garbagecalendar_location=Bachstra%C3%9Fe+%28Naunheim%29&sp_garbagecalendar_view=categoryView&sp_garbagecalendar_garbageTypes%5B%5D=waste&sp_garbagecalendar_garbageTypes%5B%5D=recycle&sp_garbagecalendar_garbageTypes%5B%5D=paper&sp_garbagecalendar_dateSelect_month=2&sp_garbagecalender_icalDownload=true
+
+->
+abfallkalender.ics
+
+BEGIN:VCALENDAR
+VERSION:2.0
+METHOD:PUBLISH
+PRODID:-//Wetzlar//Abfallkalender//DE
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Abfallkalender Wetzlar
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+DTSTART:20230106
+DTEND:20230106
+DTSTAMP:20230106T000000
+UID:d6a5f173161ba909066d1417f895335d44de26c6fc4c58e98e14fb821e467df0
+CREATED:20230101T000000
+DESCRIPTION:Biotonne, Abfuhrbezirk 5, Bachstra¯e (Naunheim)
+LAST-MODIFIED:20230214T174101
+LOCATION:Bachstra¯e (Naunheim)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Biotonne
+END:VEVENT
+BEGIN:VEVENT
+...

@@ -1,0 +1,90 @@
+https://github.com/Treboada/Ds1302
+
+
+--
+https://github.com/Makuna/Rtc
+zu groß für 8k:
+  DS1302_Simple.ino
+Sketch uses 7332 bytes (89%) of program storage space. Maximum is 8192 bytes.
+Global variables use 420 bytes (82%) of dynamic memory, leaving 92 bytes for local variables. Maximum is 512 bytes.
+Low memory available, stability problems may occur:
+
+
+
+--
+https://wolles-elektronikkiste.de/ds1302-und-ds1307-rtc-real-time-clock
+
+Für die Ansteuerung nutze ich die Bibliothek Rtc by Makuna.
+https://github.com/Makuna/Rtc
+ Sie ist ähnlich konzipiert wie die RTClib, die ich in meinem Beitrag über den DS3231 benutzt habe. Ich nutze hier eine andere Bibliothek, da die RTClib den DS1302 nicht mit abdeck
+
+  Abweichung von DS1302 und DS1307 über eine Woche
+Die Ergebnisse sind sowohl für die fertigen, als auch die selbstgebauten DS1302 Module sehr enttäuschend. Die Abweichungen betragen bis zu einer Minute innerhalb von 7 Tagen.
+
+Der DS1302 hat einen RAM von 31 Byte,
+
+#include <ThreeWire.h>
+#include <RtcDS1302.h>
+
+ThreeWire myWire(6,5,4); // IO, SCLK, CE
+RtcDS1302<ThreeWire> rtc(myWire);
+
+#define countof(a) (sizeof(a) / sizeof(a[0]))
+RtcDateTime now;
+
+void setup () {
+    Serial.begin(9600);
+    rtc.Begin();
+    char data[] = "No entry yet";
+    uint8_t count = sizeof(data);
+    uint8_t written = rtc.SetMemory((const uint8_t*)data, count); // this includes a null terminator for the string
+    if (written != count) {
+        Serial.print("something didn't match, count = ");
+        Serial.print(count, DEC);
+        Serial.print(", written = ");
+        Serial.print(written, DEC);
+        Serial.println();
+    }
+    Serial.println("Enter \"w\" to write current time to the RAM");
+    Serial.println("Enter \"r\" to read stored time from the RAM");
+}
+
+void loop () {
+    char datestring[20];
+    if((millis()%5000) == 0){
+        now = rtc.GetDateTime();
+        makeDateTimeString(now, datestring, sizeof(datestring));
+        Serial.println(datestring);
+    }
+    if(Serial.available()){
+        char command = Serial.read();
+        now = rtc.GetDateTime();
+        switch(command){
+            case 'w':
+                Serial.print("Write to RAM: ");
+                makeDateTimeString(now, datestring, sizeof(datestring));
+                Serial.println(datestring);
+                rtc.SetMemory((const uint8_t*)datestring, sizeof(datestring));
+                break;
+            case 'r':
+                rtc.GetMemory((uint8_t*)datestring, sizeof(datestring));
+                Serial.print("Read from RAM: ");
+                Serial.println(datestring);
+                break;
+            default:
+                Serial.println("No valid command");
+        }
+    }
+}
+
+void makeDateTimeString(const RtcDateTime& dt, char* charArray, uint8_t size){
+    snprintf_P(charArray,
+        size,
+        PSTR("%02u/%02u/%04u %02u:%02u:%02u"),
+        dt.Month(),
+        dt.Day(),
+        dt.Year(),
+        dt.Hour(),
+        dt.Minute(),
+        dt.Second() );
+}
