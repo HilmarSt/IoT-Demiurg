@@ -1,0 +1,162 @@
+! hat jedes Mal eine andere MAC (siehe ifconfig):
+29.05.2024, 19:28   76:8F:1E:99:49:D1
+29.05.2024, 19:34   82:46:45:A3:63:FD
+
+https://novamostra.com/2020/09/23/enc28j60-custom-mac-address-linux-service/
+  Custom MAC Address Linux Service
+ the MAC Address is different after each boot, which is a result of the ENC28J60 chip. The reason is that ENC28J60 does not come with a preset MAC address but instead it randomly generates a new one on every boot. We can overcome this, and set a constant MAC Address
+ using a Linux service with systemd.
+
+  Use a Linux service to set your own MAC Address
+1) Create a new file using the command:
+sudo nano /lib/systemd/system/custommac.service
+
+2) Enter the following content:
+[Unit]
+Description=ENC28J60 module MAC Address
+Wants=network-pre.target
+Before=network-pre.target
+BindsTo=sys-subsystem-net-devices-eth0.device
+After=sys-subsystem-net-devices-eth0.device
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip link set dev eth0 address dc:a6:32:fa:de:b0
+ExecStart=/sbin/ip link set dev eth0 up
+[Install]
+WantedBy=multi-user.target
+
+3) Save the file using {CTRL} + {X}, then {Y} and finally {ENTER}
+
+4) Apply the appropriate permissions:
+sudo chmod 644 /lib/systemd/system/custommac.service
+
+5) Enable the new service:
+sudo systemctl enable custommac.service
+
+Verify that the symlink was created:
+  Bild: Service Enabled, Created syymlink
+
+6) Reboot and use the following command check network settings:
+ifconfig
+
+
+
+
+
+--
+https://tutorials-raspberrypi.de/raspberry-pi-zero-ethernet-verbindung-herstellen-enc28j60/
+Raspberry Pi Zero – Ethernet Verbindung herstellen (ENC28J60)
+
+ENC28J60 Modul	Raspberry Pi    Nano-Layout (hat ENC-Board)
+SI	MOSI (GPIO10, Pin 19)       11 gr
+SO	MISO (GPIO9,  Pin 21)       12 li
+  INT/IRQ	 (GPIO25  Pin 22)   ?  9 sw
+SCK	SCKL (GPIO11, Pin 23)       13 bl
+  CS	CE0  (GPIO8,  Pin 24)   ? 10 ws
+
++3V3    17 | 18  GPIO24
+
+MOSI gr 19 | 20    GND
+MISO li 21 | 22 sw GPIO25
+SCLK bl 23 | 24 ws CE/CS0
+
+GND     25 | 26  GPIO07
+
+Das Ethernet Modul benutzt SPI, daher müssen wir es zuerst einmal freischalten, falls noch nicht bereits getan:
+  sudo raspi-config
+Unter “8. Advanced Options” gibt es den Eintrag “A6 SPI”, welchen wir aktivieren. Ggf. ist ein Neustart nötig.
+       3. Interface: I4 SPI (und I5 I2C) sudo reboot
+
+
+sudo nano /boot/config.txt
+  Am Ende dieser Datei fügen wir folgende Zeile ein:
+dtoverlay=enc28j60
+
+sudo reboot
+
+  Von der Geschwindigkeit her kommt ein über SPI betriebener Ethernet Port nicht an einen eingebauten Ethernet Anschluss heran. Auch eine WLAN Verbindung ist schneller. In meinen Tests hatte ich eine Download Geschwindigkeit von ca. 5Mbit/s.
+
+
+--
+ Note that the module provides good old 10-Mbit half-duplex Ethernet; it's possible your hub isn't configured to expect this.
+
+--
+https://www.az-delivery.de/blogs/azdelivery-blog-fur-arduino-und-raspberry-pi/ethernet-fur-den-raspberry-pi-zero-enc28j60
+[Bild: ENC_pinout_grande.png
+RST: nc
+INT: GP25
+]
+    sudo mousepad /boot/config.txt
+    Dann folgende Zeile am Ende ergänzen:
+    dtoverlay=enc28j60, int_pin=25, speed=12000000
+
+Gemäß Datenblatt hat der eingebaute Quarz eine Frequenz von 20 oder wie auf dem Bild 25 MHz. Wenn alles stabil funktioniert, kann „speed“ höher gesetzt werden.
+
+
+
+--
+https://www.instructables.com/Super-Cheap-Ethernet-for-the-Raspberry-Pi/
+
+Pi            ENC28J60
+----------------------
+GPIO10/MOSI   SI
+GPIO9/MISO    SD
+GPIO11/SCLK   SCK
+
+GPIO25        INT
+CE0#/GPIO8    CS
+
+
+First we'll do a quick check. At the command prompt, type
+
+ls /boot/overlays/enc28*
+
+If the Pi responds simply with
+
+/boot/overlays/enc28j60-overlay.dtb
+
+then you're good to go. If not (i.e. "No such file or directory"), the OS version is too old and you'll need to update it. These instructions assume you're using Raspbian "Jessie" release.
+
+If all's well, type
+
+sudo nano /boot/config.txt
+
+This will start the nano text editor, editing the system configuration file /boot/config.txt.
+
+Scroll down until you find a section starting # Uncomment some or all of these and enter the following two lines:
+
+dtparam=spi=on
+dtoverlay=enc28j60
+
+(For the first of these, if you can see a line #dtparam=spi=on, you can just remove the # character from the start of the line).
+
+
+
+Reboot the Pi, and log in again. Back at the command prompt, check the network configuration with
+
+ifconfig
+
+
+
+    Note that the module provides good old 10-Mbit half-duplex Ethernet; it's possible your hub isn't configured to expect this.
+    Check to see the driver module is loaded with:
+
+lsmod<br>
+
+You should see a line starting enc28j60 in the output. If not, re-check the /boot/config.txt contents.
+
+    Check for boot-time messages with the command:
+
+dmesg<br>
+
+You should see messages similar to the following when the driver starts up:
+
+[   13.012797] spi spi0.0: setting up native-CS0 as GPIO 8
+[   13.013115] spi spi0.1: setting up native-CS1 as GPIO 7
+[   13.128148] enc28j60 spi0.0: enc28j60 Ethernet driver 1.01 loaded
+[   13.187818] net eth0: enc28j60 driver registered
+
+followed a short while later by:
+
+[   18.684532] net eth0: link up - Half duplex
+[   18.684755] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready

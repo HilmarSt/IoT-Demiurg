@@ -1,0 +1,18 @@
+sudo nano /lib/systemd/system/custommac.service
+
+[Unit]
+Description=ENC28J60 module MAC Address
+Wants=network-pre.target
+Before=network-pre.target
+BindsTo=sys-subsystem-net-devices-eth0.device
+After=sys-subsystem-net-devices-eth0.device
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip link set dev eth0 address dc:a6:32:fa:de:b0
+ExecStart=/sbin/ip link set dev eth0 up
+[Install]
+WantedBy=multi-user.target
+
+sudo chmod 644 /lib/systemd/system/custommac.service
+
+sudo systemctl enable custommac.service

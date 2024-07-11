@@ -1,0 +1,76 @@
+https://github.com/AllanGallop/RPi_GPIO_i2c_LCD
+Description
+    A simple module for working with the HD44780 LCD over I²C using the PCF8574 Backpack
+
+Features
+    Non-Blocking update loop
+    Supports 2x16 and 4x20 Displays
+    Easy to use
+    Callback loop for updating display directly
+
+Install
+    Make sure i2c is enabled! sudo raspi-config
+
+Using PyPi:
+pip3 install RPi-GPIO-I2C-LCD
+->
+Collecting RPi-GPIO-I2C-LCD
+  Downloading https://www.piwheels.org/simple/rpi-gpio-i2c-lcd/RPi_GPIO_i2c_LCD-0.1.3-py3-none-any.whl (3.8 kB)
+Collecting SMBUS
+  Downloading https://www.piwheels.org/simple/smbus/smbus-1.1.post2-cp39-cp39-linux_armv6l.whl (39 kB)
+Installing collected packages: SMBUS, RPi-GPIO-I2C-LCD
+Successfully installed RPi-GPIO-I2C-LCD-0.1.3 SMBUS-1.1.post2
+
+
+Usage
+set(string,line)
+Sets string to given line
+
+get(line)
+Returns string of given line from buffer
+
+backlight(on|off)
+Turns backlight on or off (default is on)
+
+clear()
+Clears display buffers
+
+Examples
+...
+from RPi_GPIO_i2c_LCD import lcd
+from time import sleep
+
+## Address of backpack
+i2c_address = 0x27
+
+## Initalize display
+lcdDisplay = lcd.HD44780(i2c_address)
+
+## Set string value to buffer
+lcdDisplay.set("Hello",1)
+lcdDisplay.set("World",2)
+
+while(True):
+    lcdDisplay.backlight("off")
+    sleep(1)
+    lcdDisplay.backlight("on")
+    sleep(1)
+
+
+
+  Callback Loop
+
+from RPi_GPIO_i2c_LCD import lcd
+from time import sleep, strftime
+
+## Callback function that will run on every display loop
+def MyFunction(self):
+    ## Show current time on line 2
+    self.lcd.display_string(str(strftime("%d/%m %H:%M:%S").center(16,' ')),2)
+
+## Initalize display with callback
+lcdDisplay = lcd.HD44780(0x27,MyFunction)
+
+## Set string value to buffer
+lcdDisplay.set("The time is:",1)
+sleep(6)
