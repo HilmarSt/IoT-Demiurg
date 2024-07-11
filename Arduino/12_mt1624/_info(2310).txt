@@ -1,0 +1,35 @@
+https://github.com/SpenceKonde/megaTinyCore
+
+IDE versions, and using the right one
+V1.8.13 is the "golden version" and the only one I recommend. All the more recent ones gained bugs, and its the last version with a substantial improvement.
+
+Aktuell: 1.8.19 - installiert in g:\arduino-portable
+https://docs.arduino.cc/software/ide-v1/tutorials/PortableIDE
+How to create and use a portable version of the Arduino Software (IDE)
+The procedure is made of a few simple steps. You may use a pendrive or a local folder on your machine. Once done, with libraries and additional cores where needed, that folder can be copied on other machines.
+    Download a compressed version of the Arduino IDE according to your OS;
+    Once download has been completed, extract the archive content on the chosen unit (local or pendrive);
+    Open the extracted folder and in its root create a new directory called portable, alongside the others;
+the portable folder will be populated by the Arduino Software (IDE) as needed by libraries, sketches and cores.
+To use this installation, launch the Arduino executable;
+From now on all the sketches, libraries and additional cores will be installed in the portable folder. You can copy the whole main folder and bring it with you anywhere you want: it will retain all your preferences, libraries, cores and sketches.
+
+
+https://www.arduino.cc/en/software/OldSoftwareReleases
+1.8.13
+Windows (zip):
+https://downloads.arduino.cc/arduino-1.8.13-windows.zip
+
+
+
+
+--
+https://www.tindie.com/products/drazzy/attiny322416141604-dev-board-arduino-compatible/
+  ist bei Bildern:
+-Pinout:
+https://cdn.tindiemedia.com/images/resize/T_E4oW2yDNH2OVEbGu1qk2--raM=/p/full-fit-in/1782x1336/i/77443/products/2021-06-10T18%3A44%3A33.719Z-ATtiny_x24_tindie.png?1623326202
+- Schaltplan:
+https://cdn.tindiemedia.com/images/resize/TMD2rPD-OJ1kwzp3vnkbtPSTJA4=/p/full-fit-in/1782x1336/i/77443/products/2021-10-29T09%3A26%3A37.159Z-sch_xy4_B.png?1635474434
+
+... Even more exciting, the 2-series (with a 2 in the tens place) introduces the first true differential ADC with programable gain on an avr since the tiny841 - resolution was improved to to 12 bits from 10, accepted voltages range can go a fraction of a volt outside of the power rails for high side current sensing and similar applications, and features 1024-sample automatic accumulation, allowing oversampling and decimation to reach 17 bit accuracy (though the lower bits in that case depend on careful power supply and reference decoupling). ...
+

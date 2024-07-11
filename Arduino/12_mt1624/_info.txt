@@ -1,0 +1,4 @@
+Board: megaTinyCore
+Chip: ATtiny1624
+Clock: 20 MHz internal
+Programmer: SerialUPDI - 230400 (CH340: 460800)

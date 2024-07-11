@@ -1,0 +1,186 @@
+SerialUPDI
+UPDI programming for Arduino using a serial adapter
+Based on pymcuprog, with significant modifications
+By Quentin Bolsee and Spence Konde
+Version 1.2.3 - Jan 2022
+Using serial port COM6 at 230400 baud.
+Target: attiny1624
+Set fuses: ['0:0b00000000', '2:0x02', '6:0x04', '7:0x00', '8:0x00']
+Action: write
+File: D:\tmpw\arduino_build_532170/_univBlink.ino.hex
+pymcuprog.programmer - INFO - Setting up programming session for 'attiny1624'
+pymcuprog.deviceinfo.deviceinfo - INFO - Looking for device attiny1624
+pymcuprog.serialupdi.physical - INFO - Opening port 'COM6' at '115200' baud
+pymcuprog.serialupdi.link - INFO - STCS 08 to 0x03
+pymcuprog.serialupdi.link - INFO - STCS 06 to 0x02
+pymcuprog.serialupdi.link - INFO - LDCS from 0x00
+pymcuprog.serialupdi.link - INFO - UPDI init OK
+pymcuprog.serialupdi.link - INFO - STCS 06 to 0x02
+pymcuprog.serialupdi.link - INFO - Setting UPDI clock to 8 MHz
+pymcuprog.serialupdi.link - INFO - STCS 02 to 0x09
+pymcuprog.serialupdi.physical - INFO - Switching to '230400' baud
+pymcuprog.serialupdi.application - INFO - SIB: 'tinyAVR P:0D:1-3M2 (04.59B0D.0)'
+pymcuprog.serialupdi.application - INFO - Device family ID: 'tinyAVR'
+pymcuprog.serialupdi.application - INFO - NVM interface: 'P:0'
+pymcuprog.serialupdi.application - INFO - Debug interface: 'D:1'
+pymcuprog.serialupdi.application - INFO - PDI oscillator: '3M2'
+pymcuprog.serialupdi.application - INFO - Extra info: '(04.59B0D.0)'
+pymcuprog.serialupdi.application - INFO - Using 16-bit UPDI
+pymcuprog.serialupdi.link - INFO - LDCS from 0x00
+pymcuprog.serialupdi.application - INFO - PDI revision = 0x04
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.application - INFO - Entering NVM programming mode
+pymcuprog.serialupdi.link - INFO - LDCS from 0x07
+pymcuprog.serialupdi.application - INFO - Apply reset
+pymcuprog.serialupdi.link - INFO - STCS 59 to 0x08
+pymcuprog.serialupdi.application - INFO - Release reset
+pymcuprog.serialupdi.link - INFO - STCS 00 to 0x08
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.nvm - INFO - No specific initializer for this provider
+Pinging device...
+pymcuprog.programmer - INFO - Reading device ID...
+pymcuprog.serialupdi.application - INFO - SIB: 'tinyAVR P:0D:1-3M2 (04.59B0D.0)'
+pymcuprog.serialupdi.application - INFO - Device family ID: 'tinyAVR'
+pymcuprog.serialupdi.application - INFO - NVM interface: 'P:0'
+pymcuprog.serialupdi.application - INFO - Debug interface: 'D:1'
+pymcuprog.serialupdi.application - INFO - PDI oscillator: '3M2'
+pymcuprog.serialupdi.application - INFO - Extra info: '(04.59B0D.0)'
+pymcuprog.serialupdi.application - INFO - Using 16-bit UPDI
+pymcuprog.serialupdi.link - INFO - LDCS from 0x00
+pymcuprog.serialupdi.application - INFO - PDI revision = 0x04
+pymcuprog.serialupdi.link - INFO - LDCS from 0x0B
+pymcuprog.serialupdi.application - INFO - Device ID from pyupdi = '1E942A' rev 'E'
+pymcuprog.nvm - INFO - Device ID: '1E942A'
+pymcuprog.nvm - INFO - Device revision: 'E'
+pymcuprog.nvm - INFO - Device serial number: 'b'305531564a51b4653a14''
+Ping response: 1E942A
+Setting fuse 0x0=0x0
+Writing literal values...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1 bytes of data to fuses...
+pymcuprog.programmer - INFO - Write complete.
+Verifying literal values...
+pymcuprog.programmer - INFO - Reading 1 bytes from fuses...
+pymcuprog.programmer - INFO - Verifying...
+Action took 0.04s
+Setting fuse 0x2=0x2
+Writing literal values...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1 bytes of data to fuses...
+pymcuprog.programmer - INFO - Write complete.
+Verifying literal values...
+pymcuprog.programmer - INFO - Reading 1 bytes from fuses...
+pymcuprog.programmer - INFO - Verifying...
+Action took 0.02s
+Setting fuse 0x6=0x4
+Writing literal values...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1 bytes of data to fuses...
+pymcuprog.programmer - INFO - Write complete.
+Verifying literal values...
+pymcuprog.programmer - INFO - Reading 1 bytes from fuses...
+pymcuprog.programmer - INFO - Verifying...
+Action took 0.03s
+Setting fuse 0x7=0x0
+Writing literal values...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1 bytes of data to fuses...
+pymcuprog.programmer - INFO - Write complete.
+Verifying literal values...
+pymcuprog.programmer - INFO - Reading 1 bytes from fuses...
+pymcuprog.programmer - INFO - Verifying...
+Action took 0.02s
+Setting fuse 0x8=0x0
+Writing literal values...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1 bytes of data to fuses...
+pymcuprog.programmer - INFO - Write complete.
+Verifying literal values...
+pymcuprog.programmer - INFO - Reading 1 bytes from fuses...
+pymcuprog.programmer - INFO - Verifying...
+Action took 0.03s
+Finished writing fuses.
+Chip/Bulk erase,
+Memory type eeprom is conditionally erased (depending upon EESAVE fuse setting)
+Memory type flash is always erased
+Memory type lockbits is always erased
+...
+pymcuprog.programmer - INFO - Erase...
+pymcuprog.serialupdi.nvm - INFO - Chip erase using NVM CTRL
+Erased.
+Action took 0.00s
+Writing from hex file...
+Writing flash...
+pymcuprog.programmer - INFO - Write...
+pymcuprog.programmer - INFO - Writing 1394 bytes of data to flash...
+[==================================================] 22/22
+pymcuprog.programmer - INFO - Write complete.
+Action took 0.20s
+Verifying...
+pymcuprog.programmer - INFO - Reading 1394 bytes from flash...
+[==================================================] 3/3
+pymcuprog.programmer - INFO - Verifying...
+Verify successful. Data in flash matches data in specified hex-file
+Action took 0.08s
+pymcuprog.serialupdi.application - INFO - Leaving NVM programming mode
+pymcuprog.serialupdi.application - INFO - Apply reset
+pymcuprog.serialupdi.link - INFO - STCS 59 to 0x08
+pymcuprog.serialupdi.application - INFO - Release reset
+pymcuprog.serialupdi.link - INFO - STCS 00 to 0x08
+pymcuprog.serialupdi.link - INFO - STCS 0C to 0x03
+pymcuprog.serialupdi.physical - INFO - Closing port 'COM6'
