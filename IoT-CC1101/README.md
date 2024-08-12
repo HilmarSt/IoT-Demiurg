@@ -1,4 +1,5 @@
 This CircuitPython code is based on https://github.com/unixb0y/cpy-cc1101
+
 It was refactored because of only 32 kB RAM inside the SAMD21 MCU.
 
 Currently the code runs on the following boards:
