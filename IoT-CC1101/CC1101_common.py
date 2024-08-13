@@ -232,7 +232,7 @@ def initRegisters_RX():
     writeSingleByte(PKTLEN, 0x15)
     writeSingleByte(MDMCFG4, 0x87)
     writeSingleByte(MDMCFG3, 0x10)
-    writeSingleByte(MDMCFG2, 0x32)
+    writeSingleByte(MDMCFG2, 0x32) # 0x3? = ASK
     writeSingleByte(MDMCFG1, 0x22)
     writeSingleByte(MDMCFG0, 0xF8)
     writeSingleByte(DEVIATN, 0x00)

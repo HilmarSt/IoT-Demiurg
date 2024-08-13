@@ -8,7 +8,7 @@ data_len = 0x17 # PKTLEN is programmed to 0x17, add 2 status bytes
 # refactored code_rx.py from github.com/unixb0y/cpy-cc1101
 from CC1101_common import *
 
-print("CPY-CC1101/code_rx.py")
+print("Rx mode ASK") # MDMCFG2 = 0x3? = ASK
 if valFREQ0 == 0x00:
   print(" SMA antenna module configured")
 else:
