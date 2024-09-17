@@ -1,0 +1,4 @@
+28.07.2024  05:12             5.356 adafruit_framebuf.mpy
+20.08.2024  05:15             2.459 adafruit_ina219.mpy
+28.07.2024  05:12             1.304 adafruit_pcd8544.mpy
+20.08.2024  05:15    <DIR>          adafruit_register
