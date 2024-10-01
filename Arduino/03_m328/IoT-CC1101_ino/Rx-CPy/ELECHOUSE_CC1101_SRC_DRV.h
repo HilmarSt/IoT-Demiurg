@@ -5,8 +5,8 @@
     Version: November 12, 2010
 
   This library is designed to use CC1101/CC1100 module on Arduino platform.
-  CC1101/CC1100 module is an useful wireless module.Using the functions of the 
-  library, you can easily send and receive data by the CC1101/CC1100 module. 
+  CC1101/CC1100 module is an useful wireless module.Using the functions of the
+  library, you can easily send and receive data by the CC1101/CC1100 module.
   Just have fun!
   For the details, please refer to the datasheet of CC1100/CC1101.
 ----------------------------------------------------------------------------------------------------------------
@@ -189,6 +189,6 @@ public:
   bool CheckRxFifo(int t);
 };
 
-extern ELECHOUSE_CC1101 ELECHOUSE_cc1101;
+extern ELECHOUSE_CC1101 EHcc1101;
 
 #endif

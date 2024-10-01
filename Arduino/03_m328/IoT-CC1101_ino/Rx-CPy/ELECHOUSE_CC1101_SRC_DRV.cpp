@@ -551,7 +551,7 @@ SpiWriteReg(CC1101_FSCTRL0, map(MHz, 300, 348, clb1[0], clb1[1]));
 if (MHz < 322.88){SpiWriteReg(CC1101_TEST0,0x0B);}
 else{
 SpiWriteReg(CC1101_TEST0,0x09);
-int s = ELECHOUSE_cc1101.SpiReadStatus(CC1101_FSCAL2);
+int s = EHcc1101.SpiReadStatus(CC1101_FSCAL2);
 if (s<32){SpiWriteReg(CC1101_FSCAL2, s+32);}
 if (last_pa != 1){setPA(pa);}
 }
@@ -561,7 +561,7 @@ SpiWriteReg(CC1101_FSCTRL0, map(MHz, 378, 464, clb2[0], clb2[1]));
 if (MHz < 430.5){SpiWriteReg(CC1101_TEST0,0x0B);}
 else{
 SpiWriteReg(CC1101_TEST0,0x09);
-int s = ELECHOUSE_cc1101.SpiReadStatus(CC1101_FSCAL2);
+int s = EHcc1101.SpiReadStatus(CC1101_FSCAL2);
 if (s<32){SpiWriteReg(CC1101_FSCAL2, s+32);}
 if (last_pa != 2){setPA(pa);}
 }
@@ -571,7 +571,7 @@ SpiWriteReg(CC1101_FSCTRL0, map(MHz, 779, 899, clb3[0], clb3[1]));
 if (MHz < 861){SpiWriteReg(CC1101_TEST0,0x0B);}
 else{
 SpiWriteReg(CC1101_TEST0,0x09);
-int s = ELECHOUSE_cc1101.SpiReadStatus(CC1101_FSCAL2);
+int s = EHcc1101.SpiReadStatus(CC1101_FSCAL2);
 if (s<32){SpiWriteReg(CC1101_FSCAL2, s+32);}
 if (last_pa != 3){setPA(pa);}
 }
@@ -579,7 +579,7 @@ if (last_pa != 3){setPA(pa);}
 else if (MHz >= 900 && MHz <= 928){
 SpiWriteReg(CC1101_FSCTRL0, map(MHz, 900, 928, clb4[0], clb4[1]));
 SpiWriteReg(CC1101_TEST0,0x09);
-int s = ELECHOUSE_cc1101.SpiReadStatus(CC1101_FSCAL2);
+int s = EHcc1101.SpiReadStatus(CC1101_FSCAL2);
 if (s<32){SpiWriteReg(CC1101_FSCAL2, s+32);}
 if (last_pa != 4){setPA(pa);}
 }
@@ -1304,4 +1304,4 @@ byte ELECHOUSE_CC1101::ReceiveData(byte *rxBuffer)
  		return 0;
 	}
 }
-ELECHOUSE_CC1101 ELECHOUSE_cc1101;
+ELECHOUSE_CC1101 EHcc1101;

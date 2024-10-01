@@ -6,4 +6,4 @@ Currently the code runs on the following boards:
 - Adafruit Feather M0 Express (SAMD21)
 - Raspberry Pi Pico (RP2040)
 
-It is planned to port it to C/C++ for the Arduino platform to run it also on AVR-based MCU's.
+The C/C++ code for AVR-based MCU's can be found in IoT-Demiurg/Arduino/03_m328/IoT-CC1101_ino
