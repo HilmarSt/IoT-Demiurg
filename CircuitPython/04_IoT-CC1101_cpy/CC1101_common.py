@@ -1,8 +1,9 @@
+CMNversion="CC1101_common8.py"
 # refactored code from github.com/unixb0y/cpy-cc1101
+
 from digitalio import DigitalInOut
 import board
 import busio
-import time
 from adafruit_bus_device.spi_device import SPIDevice
 
 def initSPI():
@@ -23,6 +24,9 @@ def initSPI():
     gdo0 = DigitalInOut(board.D10)
   global device
   device = SPIDevice(mySPI, cs, baudrate=50000, polarity=0, phase=0)
+
+  if readSingleByte(VERSION) != 0x14:
+    raise Exception("Chip version is not 0x14")
 
 def is_RPi_Pico():
   return RPi_Pico_detected
@@ -175,6 +179,7 @@ def writeBurst(address, data):
     data.insert(0, (WRITE_BURST | address))
     with device as d:
     	d.write(bytearray(data))
+    data.pop(0)
 
 def strobe(address):
     databuffer = bytearray([address, 0x00])
@@ -182,9 +187,6 @@ def strobe(address):
     	d.write(databuffer, end=1)
     	d.readinto(databuffer, end=2)
     return databuffer
-
-def timestamp(): # - 1.1.2000 + 1000  www.unixtimestamp.com
-  print(time.time() - 1577835800, end='') # ? - 946683800
 
 def initRegisters1():
     writeSingleByte(FIFOTHR, 0x47)
