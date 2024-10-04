@@ -17,10 +17,39 @@ pixels.show()
 
 print("INA219-PCD8544") # on serial
 
-i2c_bus = busio.I2C(board.GP7, board.GP6)  # i2c = busio.I2C(SCL, SDA)
-i2c_bus.try_lock()
-print("i2c-scan (INA219 = 64):", i2c_bus.scan())
-i2c_bus.unlock()
+# Initialize SPI bus and control pins
+spi = busio.SPI(clock=board.GP2, MOSI=board.GP3)
+dc = digitalio.DigitalInOut(board.GP4)  # data/command
+cs = digitalio.DigitalInOut(board.GP1)  # Chip select
+reset = digitalio.DigitalInOut(board.GP0)  # reset
+backlight = digitalio.DigitalInOut(board.GP5)  # backlight - active low
+
+display = adafruit_pcd8544.PCD8544(spi, dc, cs, reset)
+
+display.bias = 4
+display.contrast = 60
+
+# Turn on the Backlight LED
+backlight.switch_to_output()
+backlight.value = False
+
+try:
+  i2c_bus = busio.I2C(board.GP7, board.GP6)  # i2c = busio.I2C(SCL, SDA)
+  i2c_bus.try_lock()
+  res = i2c_bus.scan()
+  print("i2c-scan (INA219 = 64):", res)
+  display.text("i2c-scan: {}".format(res), 0, 0, 1)
+  display.show()
+  i2c_bus.unlock()
+  time.sleep(1)
+except Exception as e:
+  print("*** Exception:")
+  print(e) # "No pull up found on SDA or SCL; check your wiring"
+  display.text("*** Exception:", 0, 0, 1)
+  display.text(str(e), 0, 8, 1)
+  display.show()
+  while True:
+    time.sleep(1)
 
 ina219 = INA219(i2c_bus)
 
@@ -46,23 +75,6 @@ print("Power Register : {:6.3f}   W".format(power))
 print("")
 
 
-print("init PCD8544")
-# Initialize SPI bus and control pins
-spi = busio.SPI(clock=board.GP2, MOSI=board.GP3)
-dc = digitalio.DigitalInOut(board.GP4)  # data/command
-cs = digitalio.DigitalInOut(board.GP1)  # Chip select
-reset = digitalio.DigitalInOut(board.GP0)  # reset
-backlight = digitalio.DigitalInOut(board.GP5)  # backlight - active low
-
-display = adafruit_pcd8544.PCD8544(spi, dc, cs, reset)
-
-display.bias = 4
-display.contrast = 60
-
-# Turn on the Backlight LED
-backlight.switch_to_output()
-backlight.value = False
-
 #display.fill(0) # Clear the display. (adafruit_framebuf)
 #display.show() # Always call show() after changing pixels to make the display update visible!
 
@@ -81,11 +93,11 @@ time.sleep(1)
 display.invert = False
 '''
 display.fill(0)
-display.text("Voltage (VIN+)", 0, 0, 1)
+display.text("Voltage (VIN-)", 0, 0, 1)
 display.text("Shunt Current", 0, 24, 1)
 
 while True:
-  pixels[0] = (10,15,25)
+  pixels[0] = (10,15,25) # Neopixel (R,G,B)
   pixels.show()
 
   bus_voltage = ina219.bus_voltage  # voltage on V- (load side)
@@ -96,12 +108,12 @@ while True:
   pixels[0] = (0,0,0)
   pixels.show()
 
-  display.text(" {:4.2f} V".format(bus_voltage + shunt_voltage), 0, 8, 1, size=2)
+  display.text(" {:4.2f} V".format(bus_voltage), 0, 8, 1, size=2)
   display.text("{:4.0f} mA".format(current), 0, 32, 1, size=2)
   display.show()
 
   # clear the values
-  display.text(" {:4.2f} V".format(bus_voltage + shunt_voltage), 0, 8, 0, size=2)
+  display.text(" {:4.2f} V".format(bus_voltage), 0, 8, 0, size=2)
   display.text("{:4.0f} mA".format(current), 0, 32, 0, size=2)
 
   #time.sleep(0.5)
